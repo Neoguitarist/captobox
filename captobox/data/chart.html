@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+	<style>
+	#compteur,#compteur2, #vitesse, #vitesse2{
+    	    width:300px; 
+    	    display: inline-block;        
+    }
+     
+    #zoom,#zoom2{
+	     	writing-mode: bt-lr; /* IE */
+    		-webkit-appearance: slider-vertical; /* WebKit */
+    		width: 8px;
+    		height: 150px;
+	    	padding: 0 5px;
+    }
+     
+    .droite{
+			display:block;
+			float: right;
+			width: 200px;
+	}
+
+	h1{
+			font-weight:bold;
+			color:#8A8A8A;
+			font-size:20px;
+			text-align:left;
+			font-family:arial, helvetica, sans-serif;
+			line-height:1;
+	}
+	
+	.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+	}
+	.onoffswitch-checkbox {
+		display: none;
+	}
+	.onoffswitch-label {
+		display: block; overflow: hidden; cursor: pointer;
+		border: 2px solid #999999; border-radius: 20px;
+	}
+	.onoffswitch-inner {
+		display: block; width: 200%; margin-left: -100%;
+		transition: margin 0.3s ease-in 0s;
+	}
+	.onoffswitch-inner:before, .onoffswitch-inner:after {
+		display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+		font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+		box-sizing: border-box;
+	}
+	.onoffswitch-inner:before {
+		content: "ON";
+		padding-left: 10px;
+		background-color: #EB1111; color: #FFFFFF;
+	}
+	.onoffswitch-inner:after {
+		content: "OFF";
+		padding-right: 10px;
+		background-color: #EEEEEE; color: #999999;
+		text-align: right;
+	}
+	.onoffswitch-switch {
+		display: block; width: 18px; margin: 6px;
+		background: #FFFFFF;
+		position: absolute; top: 0; bottom: 0;
+		right: 56px;
+		border: 2px solid #999999; border-radius: 20px;
+		transition: all 0.3s ease-in 0s; 
+	}
+	.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+		margin-left: 0;
+	}
+	.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+		right: 0px; 
+	}
+
+
+	
+</style>
+<head>
+<title>Courbes</title>
+
+<script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="canvasjs.min.js"></script>
+<script type="text/javascript">
+    window.onload = function() {
+        var dataPoints = [];
+        var title=[];
+		var title2=[];
+        function getDataPointsFromCSV(csv) {
+            var dataPoints = csvLines = points = [];
+            csvLines = csv.split(/[\r?\n|\r|\n]+/);         
+		        
+            for (var i = 1; i < csvLines.length; i++)
+                if (csvLines[i].length > 0) {
+                    points = csvLines[i].split(":"); 
+                    title= csvLines[0].split(":");                 
+                    var date_parsed = points[0].split(",");
+                    dataPoints.push({ 						
+                        x: new Date(date_parsed[0],date_parsed[1],date_parsed[2],date_parsed[3],date_parsed[4],date_parsed[5]), 
+                        y: parseFloat(points[1]) 		
+                    });
+                }
+            return dataPoints;
+        }
+        function getDataPointsFromCSV2(csv) {
+            var dataPoints = csvLines = points = [];
+            csvLines = csv.split(/[\r?\n|\r|\n]+/);         
+		        
+            for (var i = 1; i < csvLines.length; i++)
+                if (csvLines[i].length > 0) {
+                    points = csvLines[i].split(":"); 
+                    title2= csvLines[0].split(":");   
+                             
+                    var date_parsed = points[0].split(",");
+                    dataPoints.push({ 						
+                        x: new Date(date_parsed[0],date_parsed[1],date_parsed[2],date_parsed[3],date_parsed[4],date_parsed[5]), 
+                        y: parseFloat(points[2]) 		
+                    });
+                }
+            return dataPoints;
+        }
+        
+		
+		
+	$.get("save.csv", function(data) {
+	    var chart = new CanvasJS.Chart("chartContainer", {
+		 
+		    
+			
+		    
+		    data: [{
+		         type: "spline",
+		         
+		         dataPoints: getDataPointsFromCSV(data)
+		      }]
+	     });
+		var chart2 = new CanvasJS.Chart("chartContainer2", {
+		   
+		    
+			
+		    
+		    data: [{
+		         type: "spline",
+		         
+		         dataPoints: getDataPointsFromCSV2(data)
+		      }]
+	     });
+	      chart.render();
+	      chart2.render();
+			console.log(title[1]);    
+			console.log(title[2]);   
+			document.getElementById("p1").innerHTML = title[1];
+			document.getElementById("p2").innerHTML = title[2];
+			
+	});
+	
+	
+  }
+</script>
+</head>
+<body>
+	<h1>Courbes</h1>
+	<h1><p id="p1">Capteur 1</p></h1>
+
+	<div id="chartContainer" style="width:100%; height:200px;"></div>
+	<h1><p id="p2">Capteur 2</p></h1>
+
+	<div id="chartContainer2" style="width:100%; height:200px;"></div>
+	<div class="gauche">
+		<button onclick="window.location='index.html';"><h1>Retour</h1></button>
+	</div>
+</body>
+</html>

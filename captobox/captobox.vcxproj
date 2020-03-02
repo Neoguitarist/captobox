@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C5F80730-F44F-4478-BDAE-6634EFC2CA88}</ProjectGuid>
+    <RootNamespace>captobox</RootNamespace>
+    <ProjectName>captobox</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>
+    </PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>
+    </PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>
+    </PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>
+    </PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266WiFi\src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266WebServer\src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266mDNS;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266httpUpdate\src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266HTTPClient\src;$(ProjectDir)..\..\libraries\Time;$(ProjectDir)..\..\libraries\elapsedMillis;$(ProjectDir)..\..\libraries\OneButton\src;$(ProjectDir)..\..\libraries\Adafruit_NeoPixel;$(ProjectDir)..\..\libraries\DallasTemperature;$(ProjectDir)..\..\libraries\OneWire;$(ProjectDir)..\..\libraries\BlueDot_BME280_Library;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\Wire;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\SPI;$(ProjectDir)..\..\libraries\Adafruit_BMP085_Unified;$(ProjectDir)..\..\libraries\Adafruit_Unified_Sensor;$(ProjectDir)..\..\libraries\DHT_sensor_library;$(ProjectDir)..\..\libraries\MOD-1023-master;$(ProjectDir)..\..\libraries\Adafruit_BME680_Library;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\libb64;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\spiffs;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\umm_malloc;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\variants\d1_mini;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\lwip2\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\libc\xtensa-lx106-elf\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(ProjectDir)..\__vm\.captobox.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
+      <PreprocessorDefinitions>__ESP8266_esp8266__;__ESP8266_ESP8266__;_VMDEBUG=1;__ets__;ICACHE_FLASH;F_CPU=80000000L;LWIP_OPEN_SRC;TCP_MSS=536;ARDUINO=108012;ARDUINO_ESP8266_WEMOS_D1MINI;ARDUINO_ARCH_ESP8266;ESP8266;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="VisualMicro" />
+  </ItemGroup>
+  <PropertyGroup>
+    <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="src\captobox.ino">
+      <FileType>CppCode</FileType>
+    </None>
+    <None Include="data\canvasjs.min.js.gz" />
+    <None Include="data\chart.html" />
+    <None Include="data\config\config.html" />
+    <None Include="data\config\html5simple.css" />
+    <None Include="data\config\update.html" />
+    <None Include="data\index.html" />
+    <None Include="data\jquery-1.11.1.min.js.gz" />
+    <None Include="data\jsontest.html" />
+    <None Include="data\justgage.js" />
+    <None Include="data\justgage.js.gz" />
+    <None Include="data\raphael-2.1.4.min.js" />
+    <None Include="data\raphael-2.1.4.min.js.gz" />
+    <None Include="data\save.csv" />
+    <None Include="data\smoothie.js" />
+    <None Include="data\smoothie.js.gz" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Measure.h" />
+    <ClInclude Include="src\Config.h" />
+    <ClInclude Include="src\libs_capteurs.h" />
+    <ClInclude Include="src\Sensor.h" />
+    <ClInclude Include="src\spiffs_lib.h" />
+    <ClInclude Include="__vm\.captobox.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Measure.cpp" />
+    <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\Sensor.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="data\config.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties config.Debug.customdebug_esp8266_d1_mini_debugger_type="universal" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

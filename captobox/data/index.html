@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Captobox</title>
+	<script type="text/javascript" src="smoothie.js"></script>
+	<script src="raphael-2.1.4.min.js"></script>
+	<script src="justgage.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<style>
+	#compteur,#compteur2, #vitesse, #vitesse2{
+    	    width:300px; 
+    	    display: inline-block;        
+    }
+     
+    #zoom,#zoom2{
+	     	writing-mode: bt-lr; /* IE */
+    		-webkit-appearance: slider-vertical; /* WebKit */
+    		width: 8px;
+    		height: 150px;
+	    	padding: 0 5px;
+    }
+     
+    .droite{
+			display:block;
+			float: right;
+			width: 200px;
+	}
+
+	h1{
+			font-weight:bold;
+			color:#8A8A8A;
+			font-size:20px;
+			text-align:left;
+			font-family:arial, helvetica, sans-serif;
+			line-height:1;
+	}
+	
+	.onoffswitch {
+    position: relative; width: 90px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+	}
+	.onoffswitch-checkbox {
+		display: none;
+	}
+	.onoffswitch-label {
+		display: block; overflow: hidden; cursor: pointer;
+		border: 2px solid #999999; border-radius: 20px;
+	}
+	.onoffswitch-inner {
+		display: block; width: 200%; margin-left: -100%;
+		transition: margin 0.3s ease-in 0s;
+	}
+	.onoffswitch-inner:before, .onoffswitch-inner:after {
+		display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+		font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+		box-sizing: border-box;
+	}
+	.onoffswitch-inner:before {
+		content: "ON";
+		padding-left: 10px;
+		background-color: #EB1111; color: #FFFFFF;
+	}
+	.onoffswitch-inner:after {
+		content: "OFF";
+		padding-right: 10px;
+		background-color: #EEEEEE; color: #999999;
+		text-align: right;
+	}
+	.onoffswitch-switch {
+		display: block; width: 18px; margin: 6px;
+		background: #FFFFFF;
+		position: absolute; top: 0; bottom: 0;
+		right: 56px;
+		border: 2px solid #999999; border-radius: 20px;
+		transition: all 0.3s ease-in 0s; 
+	}
+	.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+		margin-left: 0;
+	}
+	.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+		right: 0px; 
+	}
+
+
+	
+</style>
+  <body onload="get_config()">
+
+	<div>  	
+		<h1>Courbe capteur 1</h1>
+		
+		<canvas id="mycanvas" width="300" height="150"></canvas> 
+		<input id="zoom" type="range" value="0" max="100" min="0" step="0.1" onchange="updatescale(this.value,smoothie,this.id);">
+		<div id="compteur" class="gauge"></div>
+		<br>
+		<input id="vitesse" type="range" value="50" max="1000" min="0" step="5" onchange="updatevitesse(this.value,smoothie,this.id);">
+
+		<h1>Courbe capteur 2</h1>
+		<canvas id="mycanvas2" width="300" height="150"></canvas> 
+		<input id="zoom2"type="range" value="0" max="100" min="0" step="0.1" onchange="updatescale(this.value,smoothie2,this.id);"> 
+		<div id="compteur2" class="gauge"></div>
+		<br>
+		<input id="vitesse2"type="range" value="50" max="1000" min="0" step="5" onchange="updatevitesse(this.value,smoothie2,this.id);">
+		
+		
+	</div>
+
+	
+	<br style="clear:both;"/>
+    
+	<table>
+
+	<tr>
+		
+		
+		<th><h1>Enregistrement </h1></th>
+		
+	<th>
+		<div class="onoffswitch">
+	
+		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" onchange=enregistrement()>
+			<label class="onoffswitch-label" for="myonoffswitch">
+				<span class="onoffswitch-inner"></span>
+				<span class="onoffswitch-switch"></span>
+			</label>
+		</div>
+		</th>
+		<th>
+				
+			<form method="get" action="save.csv">
+				<div class="gauche">
+				<button type="submit"><h1>CSV</h1></button>
+				</div>
+				</form>
+		
+		</th>
+		<th>
+				<div class="gauche">
+			<button onclick="go_chart()"><h1>Courbes</h1></button>
+		</div>
+		</th>
+	</tr>
+	<div class="gauche">
+			<button onclick="go_config()"><h1>Configuration</h1></button>
+		</div>
+	</table>
+    <script type="text/javascript">
+
+		var line1 = new TimeSeries();
+		var line2 = new TimeSeries();
+		var goconfig=false;
+		var xh_serveur = new XMLHttpRequest();
+		var xh_config = new XMLHttpRequest();
+		var xh_save = new XMLHttpRequest();
+		var capt1=0;
+		var capt2=0;
+		var capt1_max=100;
+		var capt2_max=100;
+		var val_export=0;
+		var name_capt1="branchez le capteur 1";
+		var name_capt2="branchez le capteur 2";
+		var serveur = "/lecture";
+		var config="/lecture_config";
+		var client="true";
+		var request="";
+		var frequency="15000";
+		var save="false";
+
+		var compteur = new JustGage({ //indicateur de temp
+            id: "compteur",
+            value: 0,
+            min: 0,
+            max: 50,
+            title: "",
+            donut: false,
+            gaugeWidthScale: 1,
+            counter: true,
+            hideInnerShadow: true
+        });
+
+        var compteur2 = new JustGage({ //indicateur de temp
+            id: "compteur2",
+            value: 0,
+            min: 0,
+            max: 100,
+            title: "",
+            donut: false,
+            gaugeWidthScale: 1,
+            counter: true,
+            hideInnerShadow: true
+        });
+
+        
+    	function get_config() {
+			xh_config.open("GET", config, true);
+			console.log("chargement de la configuration");
+      
+			xh_config.onreadystatechange = function(){
+				if (xh_config.readyState == 4){
+					if(xh_config.status == 200) {
+						var res = JSON.parse(xh_config.responseText); 
+						client= res.client;						
+						request = res.request;
+						frequency=res.frequency;
+						capt1=res.capt1;          
+						capt2=res.capt2;
+						name_capt1=res.name_capt1;
+						name_capt2=res.name_capt2;
+						capt1_max=res.max_capt1;
+						capt2_max=res.max_capt2;
+						save=res.save;
+						console.log(client);
+						console.log(request);
+						console.log(frequency);						
+						clearInterval(update);
+						update = setInterval(get_val,frequency);
+						console.log("configuration chargee");
+						console.log(save);
+					}
+				}
+			}
+			xh_config.send(null);
+		}
+
+        function updatevitesse(val, smooth, id_object) {
+          vitesse=document.getElementById(id_object).value=val;                  
+          smooth.options.millisPerPixel=val;        
+          console.log(vitesse);
+        }
+		
+
+		
+        function updatescale(val,smooth,id_object) {
+          document.getElementById(id_object).value=val; 
+          if(val==0) {
+			smooth.options.maxValue=null;  
+          } else{
+          	smooth.options.maxValue=val;  
+          }                     
+          console.log(val);
+        }
+        
+		var update=setInterval(get_val, frequency);
+
+		function get_val() {
+			if(goconfig==false){
+			xh_serveur.open("GET", serveur, true);      
+			xh_serveur.onreadystatechange = function(){
+				if (xh_serveur.readyState == 4){
+					if(xh_serveur.status == 200) {
+						var res = JSON.parse(xh_serveur.responseText); 
+						capt1=res.capt1;          
+						capt2=res.capt2;
+						name_capt1=res.name_capt1;
+						name_capt2=res.name_capt2;
+						capt1_max=res.max_capt1;
+						capt2_max=res.max_capt2;
+						frequency=res.frequency;
+						save=res.save;
+						console.log(datetime);
+						
+						
+					}
+				}
+			}
+			xh_serveur.send(null);
+
+			
+            compteur2.txtTitle.attr({
+                "text": name_capt2
+            });
+            compteur.txtTitle.attr({
+                "text": name_capt1
+            });
+			
+			compteur2.refresh(capt2,capt2_max);
+			line2.append(new Date().getTime(), capt2);
+			compteur.refresh(capt1,capt1_max);
+			line1.append(new Date().getTime(), capt1);
+			
+			if(save=="true"){
+							document.getElementById('myonoffswitch').checked = true;
+						}else{
+							document.getElementById('myonoffswitch').checked = false;
+						}
+
+			var currentdate = new Date(); 
+			var datetime = 
+                currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                
+			val_export+=datetime+";"+[capt1]+";\n";
+		}
+		}
+	
+		function go_config(){
+			goconfig=true;
+			window.location='config/config.html';
+			
+		}
+		function go_chart(){
+			goconfig=true;
+			window.location='chart.html';
+			
+		}
+		function go_csv(){
+			goconfig=true;
+			window.location='config/config.html';
+			
+		}
+		var smoothie = new SmoothieChart({millisPerPixel:97,  grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 2500, verticalSections: 6 } });
+			smoothie.addTimeSeries(line1, { strokeStyle: 'rgb(0, 255, 0)', fillStyle: 'rgba(0, 255, 0, 0.4)', lineWidth: 3 });	
+		smoothie.streamTo(document.getElementById("mycanvas"), 1000);
+
+
+		var smoothie2 = new SmoothieChart({millisPerPixel:97, grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 2500, verticalSections: 6 } });
+		smoothie2.addTimeSeries(line2, { strokeStyle: 'rgb(0, 255, 0)', fillStyle: 'rgba(0, 255, 0, 0.4)', lineWidth: 3 });		
+		smoothie2.streamTo(document.getElementById("mycanvas2"), 1000);
+
+	
+		var val_export="Heure;Temperature \n";
+		function exportToCsv() {
+			var myCsv = val_export;
+			window.open('data:text/csv;charset=utf-8,' + escape(myCsv));
+			
+		}
+		
+		function enregistrement(){
+		var enr = document.getElementById('myonoffswitch').checked;
+		
+		if(enr){		
+			xh_save.open("GET", "/save_spiff", true);
+			console.log("coche");
+			save="true";
+			xh_save.send(null);
+		}else{
+			xh_save.open("GET", "/stop_save_spiff", true);
+			console.log("decoche");
+			save="false";
+			xh_save.send(null);
+		}
+		}
+   
+      
+        
+    </script>
+
+  </body>
+
+</html>
