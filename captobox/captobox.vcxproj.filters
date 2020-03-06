@@ -60,16 +60,14 @@
     <None Include="data\config\update.html">
       <Filter>Misc Files</Filter>
     </None>
-    <None Include="src\captobox.ino" />
+    <None Include="data\config\config.js" />
+    <None Include="captobox.ino" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.captobox.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Config.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\libs_capteurs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Sensor.h">
@@ -81,6 +79,12 @@
     <ClInclude Include="src\Measure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\BME680Sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MOD1023Sensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Config.cpp">
@@ -90,6 +94,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Measure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BME680Sensor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MOD1023Sensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

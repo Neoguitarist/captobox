@@ -1,19 +1,19 @@
 #include "Measure.h"
 
-Measure::Measure(String pId, String pLabel, float pMin, float pMax) :
-	id(pId), label(pLabel), min(pMin), max(pMax)
+MeasureReader::MeasureReader() :
+	MeasureReader("", (Measure)0, 0, 0, []() { return 0; })
 {}
 
-float Measure::read(Sensor& sensor)
-{
-	return sensor.accept(this);
-}
-
-TemperatureMeasure::TemperatureMeasure() :
-	Measure("", "", -40, 85)
+MeasureReader::MeasureReader(const MeasureReader& o) :
+	MeasureReader(o.name, o.type, o.min, o.max, o._reader)
 {}
 
-float TemperatureMeasure::read(Sensor& sensor)
+MeasureReader::MeasureReader(
+	String pName, Measure pType, float pMin, float pMax, std::function<float()> reader) :
+	name(pName), type(pType), min(pMin), max(pMax), _reader(reader)
+{}
+
+float MeasureReader::read()
 {
-	return sensor.read_temperature();
+	return _reader();
 }

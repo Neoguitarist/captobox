@@ -1,6 +1,5 @@
 #pragma once
 
-#include <list>
 #include <WString.h>
 #include <Stream.h>
 
@@ -8,10 +7,9 @@ class Sensor
 {
 public:
 
-	const String id;
-	const String label;
+	const String name;
 
-	Sensor(Stream& logOutput, String pId, String pLabel);
+	Sensor(Stream& logOutput, String pName);
 
 	virtual void init();
 
@@ -22,11 +20,4 @@ protected:
 private:
 
 	Stream& _logOutput;
-};
-
-class ISensorVisitor
-{
-public:
-
-	void visit()
 };

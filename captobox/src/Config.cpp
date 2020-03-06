@@ -2,6 +2,14 @@
 
 #include "Config.h"
 
+namespace
+{
+	String get_next_token(Stream& input)
+	{
+		return input.available() ? input.readStringUntil('$') : "";
+	}
+}
+
 Config::Config()
 {
 	frequency = "5000";
@@ -9,22 +17,15 @@ Config::Config()
 
 void Config::load(Stream& input)
 {
-	std::vector<String> buff;
-
-	while (input.available())
-	{
-		buff.push_back(input.readStringUntil('$'));
-	}
-
-	capt1 = buff[1];
-	capt2 = buff[2];
-	frequency = buff[3];
-	client_mode = buff[4];
-	ssid_client = buff[5];
-	password_client = buff[6];
-	request = buff[7];
-	host = buff[8];
-	stream = buff[9];
+	capt1 = get_next_token(input).c_str();
+	capt2 = get_next_token(input).c_str();
+	frequency = get_next_token(input);
+	client_mode = get_next_token(input);
+	ssid_client = get_next_token(input);
+	password_client = get_next_token(input);
+	request = get_next_token(input);
+	host = get_next_token(input);
+	stream = get_next_token(input);
 }
 
 void Config::save(Stream& output) const
@@ -33,7 +34,7 @@ void Config::save(Stream& output) const
 
 	for (const String& token :
 		std::vector<String>{
-			capt1, capt2, frequency,
+			String(capt1.c_str()), String(capt2.c_str()), frequency,
 			client_mode, ssid_client, password_client,
 			request, host, stream })
 	{
@@ -45,8 +46,8 @@ void Config::save(Stream& output) const
 
 void Config::print(Stream& output) const
 {
-	output.println("capt1 : " + capt1);
-	output.println("capt2 : " + capt2);
+	output.println("capt1 : " + String(capt1.c_str()));
+	output.println("capt2 : " + String(capt2.c_str()));
 	output.println("frequence : " + frequency);
 	output.println("client  : " + client_mode);
 	output.println("ssid : " + ssid_client);
@@ -55,3 +56,4 @@ void Config::print(Stream& output) const
 	output.println("host : " + host);
 	output.println("stream : " + stream);
 }
+

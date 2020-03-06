@@ -1,3 +1,4 @@
+#include <unordered_map>
 //Import des bibliothèques ESP8266
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
@@ -10,15 +11,28 @@
 #include <Adafruit_NeoPixel.h>
 //Import des bibliotheques SPIFFS
 #include "FS.h"
-#include "spiffs_lib.h"
-#include "libs_capteurs.h"
-#include "Config.h"
+#include "src/spiffs_lib.h"
+#include "src/Config.h"
+#include "src/MOD1023Sensor.h"
+#include "src/BME680Sensor.h"
+#include "src/Measure.h"
 
-const String version = "version beta +++";
+const String version = "version beta++";
 
 Config config;
-MOD1023 sensor1(Serial, RX);
-BME680 sensor2(Serial);
+MOD1023Sensor mod1023(Serial);
+BME680Sensor bme680(Serial);
+
+std::unordered_map<std::string, MeasureReader> measureReaders =
+	{
+		{ "bme680_hum", MeasureReader("BME680 - Humidité (%)", Measure::HUMIDITY, 0, 100, []() { return bme680.read_humidity(); }) },
+		{ "bme680_temp", MeasureReader("BME680 - Température (°C)", Measure::TEMPERATURE, -40, 85, []() { return bme680.read_temperature(); }) },
+		{ "mod1023_co2", MeasureReader("MOD1023 - CO2 (ppm)", Measure::CO2, 450, 2000, []() { return mod1023.read_co2(); }) },
+		{ "mod1023_hum", MeasureReader("MOD1023 - Humidité (%)", Measure::HUMIDITY, 0, 100, []() { return mod1023.read_humidity(); }) },
+		{ "mod1023_pres", MeasureReader("MOD1023 - Pression (hPa)", Measure::PRESSURE, 300, 1100, []() { return mod1023.read_pressure(); }) },
+		{ "mod1023_temp", MeasureReader("MOD1023 - Température (°C)", Measure::TEMPERATURE, -40, 85, []() { return mod1023.read_temperature(); }) },
+		{ "mod1023_tvoc", MeasureReader("MOD1023 - TVOC (ppb)", Measure::TVOC, 125, 600, []() { return mod1023.read_tvoc(); }) }
+	};
 
 String save = "false";
 boolean writeTitle = true;
@@ -27,7 +41,6 @@ Adafruit_NeoPixel pixels = Adafruit_NeoPixel(1, D4, NEO_GRB + NEO_KHZ800);
 
 void setup()
 {
-
 	delay(1000);
 
 	Serial.begin(9600); //debug série
@@ -50,7 +63,11 @@ void setup()
 	// démarrage de la gestion SPIFFS
 	SPIFFS.begin(); 
 
-	read_config("/config.txt");
+	if (!read_config("/config.txt"))
+	{
+		Serial.println("Program stopped.");
+		return;
+	}
 
 	if (config.client_mode.equals("true"))
 	{
@@ -76,10 +93,10 @@ void setup()
 	config.print(Serial);
 	Serial.println("================================================");
 
-	Serial.print("Initialisation des capteurs... ");
-	sensor1.init();
-	sensor2.init();
-	Serial.println("OK.");
+	Serial.println("Initialisation des capteurs... ");
+	mod1023.init();
+	bme680.init();
+	Serial.println("OK.\n");
 
 	digitalWrite(BUILTIN_LED, HIGH);
 
@@ -101,9 +118,8 @@ void loop()
 			Serial.println("tick : " + millis());
 
 			send_json(config.host.c_str(), config.request,
-				String(sensor_start(config.capt1, pin_sensor1)),
-				String(sensor_start(config.capt2, pin_sensor2)),
-				String(sensor_start(config.capt1, pin_sensor1)));
+				String(measureReaders[config.capt1].read()),
+				String(measureReaders[config.capt2].read()));
 
 			Serial.println("tick : " + millis());
 		}
@@ -129,8 +145,8 @@ void setup_server()
 		{
 			File configFile;
 
-			config.capt1 = server.arg("capt1");
-			config.capt2 = server.arg("capt2");
+			config.capt1 = server.arg("capt1").c_str();
+			config.capt2 = server.arg("capt2").c_str();
 			config.frequency = server.arg("frequency");
 			config.client_mode = server.arg("client");
 			config.ssid_client = server.arg("ssid");
@@ -161,27 +177,27 @@ void setup_server()
 
 	server.on("/capt1_raw", HTTP_GET, []()
 		{
-			float val_capt1 = sensor_start(config.capt1, pin_sensor1);
-			server.send(200, "text/json", String(val_capt1));
+			server.send(200, "text/json", String(measureReaders[config.capt1].read()));
 		});
 
 	server.on("/capt2_raw", HTTP_GET, []()
 		{
-			float val_capt2 = sensor_start(config.capt2, pin_sensor2);
-			server.send(200, "text/json", String(val_capt2));
+			server.send(200, "text/json", String(measureReaders[config.capt2].read()));
 		});
 
 	server.on("/lecture", HTTP_GET, []()
 		{
+			MeasureReader& capt1 = measureReaders[config.capt1];
+			MeasureReader& capt2 = measureReaders[config.capt2];
 			String json = "{";
-			json += "\"capt1\":\"" + String(sensor_start(config.capt1, pin_sensor1)) + "\"";
-			json += ", \"name_capt1\":\"" + sensor_name(config.capt1) + "\"";
-			json += ", \"min_capt1\":\"" + String(sensor_min(config.capt1)) + "\"";
-			json += ", \"max_capt1\":\"" + String(sensor_max(config.capt1)) + "\"";
-			json += ", \"capt2\":\"" + String(sensor_start(config.capt2, pin_sensor2)) + "\"";
-			json += ", \"name_capt2\":\"" + sensor_name(config.capt2) + "\"";
-			json += ", \"min_capt2\":\"" + String(sensor_min(config.capt2)) + "\"";
-			json += ", \"max_capt2\":\"" + String(sensor_max(config.capt2)) + "\"";
+			json += "\"capt1\":\"" + String(capt1.read()) + "\"";
+			json += ", \"name_capt1\":\"" + capt1.name + "\"";
+			json += ", \"min_capt1\":\"" + String(capt1.min) + "\"";
+			json += ", \"max_capt1\":\"" + String(capt1.max) + "\"";
+			json += ", \"capt2\":\"" + String(capt2.read()) + "\"";
+			json += ", \"name_capt2\":\"" + capt2.name + "\"";
+			json += ", \"min_capt2\":\"" + String(capt2.min) + "\"";
+			json += ", \"max_capt2\":\"" + String(capt2.max) + "\"";
 			json += ", \"save\":\"" + save + "\"";
 			json += "}";
 
@@ -198,8 +214,8 @@ void setup_server()
 			json += ", \"request\":\"" + config.request + "\"";
 			json += ", \"client\":\"" + config.client_mode + "\"";
 			json += ", \"frequency\":\"" + config.frequency + "\"";
-			json += ", \"capt1\":\"" + config.capt1 + "\"";
-			json += ", \"capt2\":\"" + config.capt2 + "\"";
+			json += ", \"capt1\":\"" + String(config.capt1.c_str()) + "\"";
+			json += ", \"capt2\":\"" + String(config.capt2.c_str()) + "\"";
 			json += ", \"host\":\"" + config.host + "\"";
 			json += ", \"stream\":\"" + config.stream + "\"";
 			json += ", \"save\":\"" + save + "\"";
@@ -305,8 +321,8 @@ void savedata()
 	}
 
 	File saveFile = SPIFFS.open("/save.csv", "a");
-	String val_capt1;
-	String val_capt2;
+	MeasureReader& capt1 = measureReaders[config.capt1];
+	MeasureReader& capt2 = measureReaders[config.capt2];
 	String dateStr;
 
 	pixels.setPixelColor(0, pixels.Color(0, 0, 10));
@@ -314,12 +330,10 @@ void savedata()
 
 	if (writeTitle)
 	{
-		saveFile.println("date:" + sensor_name(config.capt1) + ":" + sensor_name(config.capt2));
+		saveFile.println("date:" + capt1.name + ":" + capt2.name);
 		writeTitle = false;
 	}
 
-	val_capt1 = String(sensor_start(config.capt1, pin_sensor1));
-	val_capt2 = String(sensor_start(config.capt2, pin_sensor2));
 	dateStr = String(year());
 
 	for (const int &token :
@@ -328,7 +342,7 @@ void savedata()
 		dateStr += "," + String(token);
 	}
 
-	saveFile.println(dateStr + ":" + val_capt1 + ":" + val_capt2);
+	saveFile.println(dateStr + ":" + String(capt1.read()) + ":" + String(capt2.read()));
 	saveFile.close();
 }
 
@@ -382,7 +396,7 @@ void connect_wifi(const char* ssid, const char* password)
 
 			for (const String &token :
 				std::vector<String>{
-					config.capt1, config.capt2, config.frequency,
+					String(config.capt1.c_str()), String(config.capt2.c_str()), config.frequency,
 					"false", config.ssid_client, config.password_client,
 					config.request, config.host, config.stream })
 			{
@@ -402,21 +416,22 @@ void connect_wifi(const char* ssid, const char* password)
 	Serial.println("\nWiFi connected\nIP address:\n" + String(WiFi.localIP()));
 }
 
-void read_config(char* fichier)
+bool read_config(const char* fichier)
 {
 	File  file = SPIFFS.open(fichier, "r");
 
 	if (!file)
 	{
-		Serial.println("file open failed");
+		Serial.println("Failed to open the configuration file (path: \"" + String(fichier) + "\").");
+		return false;
 	}
 	
-	Serial.println("====== Lecture de la configuration dans le fichier SPIFFS  =======");
-	
 	config.load(file);
+
+	return true;
 }
 
-void send_json(const char* host_in, String url_in, String data1, String data2, String data3)
+void send_json(const char* host_in, String url_in, String data1, String data2)
 {
 	WiFiClient client;
 	String contentType = "application/json";
@@ -449,11 +464,9 @@ void send_json(const char* host_in, String url_in, String data1, String data2, S
 
 void read_sensors()
 {
-	float val_capt1 = sensor_start(config.capt1, pin_sensor1);
-	float val_capt2 = sensor_start(config.capt2, pin_sensor2);
 	Serial.println("lecture des capteurs");
-	Serial.println("capteur 1 : " + String(val_capt1));
-	Serial.println("capteur 2 : " + String(val_capt2));
+	Serial.println("capteur 1 : " + String(measureReaders[config.capt1].read()));
+	Serial.println("capteur 2 : " + String(measureReaders[config.capt2].read()));
 	delay(100);
 }
 

@@ -1,7 +1,7 @@
 #include "Sensor.h"
 
-Sensor::Sensor(Stream& logOutput, String pId, String pLabel) :
-	_logOutput(logOutput), id(pId), label(pLabel)
+Sensor::Sensor(Stream& logOutput, String pName) :
+	_logOutput(logOutput), name(pName)
 {}
 
 void Sensor::init()
@@ -9,5 +9,5 @@ void Sensor::init()
 
 void Sensor::log(String msg) const
 {
-	_logOutput.println("[" + label + "] " + msg);
+	_logOutput.println("[" + name + "] " + msg);
 }

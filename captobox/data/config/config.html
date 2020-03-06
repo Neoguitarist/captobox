@@ -1,196 +1,65 @@
-
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
     <title>Configuration</title>
-
     <link rel="stylesheet" href="html5simple.css" type="text/css" />
-
-
-    <script>
-		var number_items_capt1=0;
-		var number_items_capt2=0;
-		var current_draged_capt1="";
-		var current_draged_capt2="";
-		var frequency =2000;
-		var xh_serveur = new XMLHttpRequest();
-		var config="/lecture_config";
-		var current_draged_choose="";
-		var request="";
-		var ssid="";
-		var client="";	
-		var password="";
-		var host="";
-		var stream="";
-		var version="";
-		
-		
-	
-		function get_config() {
-			
-		
-			xh_serveur.open("GET", config, true);
-			
-      
-			xh_serveur.onreadystatechange = function(){
-				if (xh_serveur.readyState == 4){
-					if(xh_serveur.status == 200) {
-						var res = JSON.parse(xh_serveur.responseText); 
-						client= res.client;
-						ssid =res.ssid_client;          
-						password =res.password_client;
-						request = res.request;
-						frequency=res.frequency;
-						host=res.host;
-						stream=res.stream;
-						version=res.vers;
-						
-						//current_draged_capt1=res.capt1;
-						//current_draged_capt2=res.capt2;
-						if(client=="true"){
-							document.getElementById('client').checked = true;
-						}
-						if(stream=="true"){
-							document.getElementById('stream').checked = true;
-						}
-						document.getElementById('ssid').value = ssid;
-						document.getElementById('password').value = password;
-						document.getElementById('request').value = request;
-						document.getElementById('frequency').value = frequency;
-						document.getElementById('host').value = host;
-						document.getElementById('p1').innerHTML = version;
-						
-						//document.getElementById('capt1').name = current_draged_capt1;
-						//document.getElementById('capt2').value = current_draged_capt2;
-						//console.log(current_draged_capt1);
-						console.log(version);
-						console.log("configuration chargée");
-						
-					}
-				}
-			}
-			xh_serveur.send(null);
-			
-		}
-		
-		function upload_config(e){
-			
-			
-			frequency= document.getElementById('frequency').value;
-			client= document.getElementById('client').checked;
-			stream= document.getElementById('stream').checked;
-			ssid= document.getElementById('ssid').value;
-			password= document.getElementById('password').value;
-			host=document.getElementById('host').value;		
-			request=document.getElementById('request').value;
-		
-		console.log("capteur 1 : "+ liste1.options[liste1.selectedIndex].value);
-		console.log("capteur 2 : "+ liste2.options[liste2.selectedIndex].value);
-		var envoi_config="write?capt1="+liste1.options[liste1.selectedIndex].value+"&capt2="+liste2.options[liste2.selectedIndex].value+"&frequency="+frequency+"&client="+client+"&ssid="+ssid+"&password="+password+"&request="+request+"&host="+host+"&stream="+stream;
-		console.log(envoi_config);
-		httpGet(envoi_config );
-		
-		setTimeout(goback(), 6000);
-		
-		
-		
-		
-		}
-		function httpGet(theUrl)
-		{
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-			xmlHttp.send( null );
-			return xmlHttp.responseText;
-		}
-		
-		function goback(){
-		console.log("redirection !");
-		window.location='../index.html';
-		
-		}
-	
-		
-
-    </script>
+    <script type="text/javascript" src="config.js"></script>
 </head>
 <body onload="get_config()">
-<p id="p1">version</p>
-    <header>
-		
-        <h1>Choix du capteur</h1>
-     
-    </header>
-    <br>
-<div id="center">
-<table>
+    <p id="p1">version</p>
+    <h1>Choix du capteur</h1>
+    <div id="center">
+        <table>
+            <tr>
+                <th>
+                    <label for="capt1">Choix du capteur 1</label>
+                    <select name="capt1" id="liste1">
+                        <option value="mod1023_co2">MOD1023 - CO2</option>
+                        <option value="mod1023_hum">MOD1023 - Humidité</option>
+                        <option value="mod1023_pres">MOD1023 - Pression</option>
+                        <option value="mod1023_temp">MOD1023 - Température</option>
+                        <option value="mod1023_tvoc">MOD1023 - TVOC</option>
+                        <option value="bme680_hum">BME680 - Humidité</option>
+                        <option value="bme680_temp">BME680 - Température</option>
+                    </select>
+                </th>
+                <th>________________</th>
+                <th>
+                    <label for="capt2">Choix du capteur 2</label>
+                    <select name="capt2" id="liste2">
+                        <option value="mod1023_co2">MOD1023 - CO2</option>
+                        <option value="mod1023_hum">MOD1023 - Humidité</option>
+                        <option value="mod1023_pres">MOD1023 - Pression</option>
+                        <option value="mod1023_temp">MOD1023 - Température</option>
+                        <option value="mod1023_tvoc">MOD1023 - TVOC</option>
+                        <option value="bme680_hum">BME680 - Humidité</option>
+                        <option value="bme680_temp">BME680 - Température</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="3"><img src="img/capto.png" /></th>
+            </tr>
+        </table>
+    </div>
+    <section>
+        <h1>Fréquence de rafraichissement</h1>
+        <input id="frequency" type="number" min="200" max="120000" step="200" value="2000" placeholder="En millisecondes">
 
-	<tr>
-      <th><label for="capt1">Choix du capteur 1</label><br />
-       <select name="capt1" id="liste1">
-           <option value="co2">CO2 PPM MH-Z16</option>
-           <option value="sound">Son</option>
-           <option value="dht11_temp">Temperature °C DHT11</option>
-           <option value="dht11_hum">Humidite % DHT11</option>
-           <option value="dallas">Sonde de température Dallas °C</option>           
-           <option value="light">Lumière</option>           
-           <option value="dust">Particules PM 2,5 mg/m3</option>
-           <option value="mod_cov">Composés volatiles PPB MOD-1023 </option>
-           <option value="mod_co2">CO2 PPM MOD-1023</option>
-           <option value="mod_temp">température °C MOD-1023</option>
-           <option value="mod_bme280">Pression atmosphérique hPa MOD-1023</option>
-           <option value="mod_hum">Humidité % MOD-1023</option>
-           <option value="mod_bme680_temp">Température °C BME680</option>
-           <option value="mod_bme680_hum">Humidité % BME680</option>
-           
-       </select>
-       </th>
-       <th>________________</th>
-       <th>		
-       <label for="capt2">Choix du capteur 2</label><br />
-       <select name="capt2" id="liste2">
-           <option value="sound">Son</option>
-           <option value="dht11_temp">Temperature °C DHT11</option>
-           <option value="dht11_hum">Humidite % DHT11</option>
-           <option value="dallas">Sonde de température Dallas °C</option>           
-           <option value="light">Lumière</option>           
-           <option value="dust">Particules PM 2,5 mg/m3</option>
-           <option value="mod_cov">Composés volatiles PPB MOD-1023 </option>
-           <option value="mod_co2">CO2 PPM MOD-1023</option>
-           <option value="mod_temp">température °C MOD-1023</option>
-           <option value="mod_bme280">Pression atmosphérique hPa MOD-1023</option>
-           <option value="mod_hum">Humidité % MOD-1023</option>
-           <option value="mod_bme680_temp">Température °C BME680</option>
-           <option value="mod_bme680_hum">Humidité % BME680</option>
-       </select>
-       </th>
-  </tr>
-  
-  <tr>
-  <th colspan="3"><img src="img/capto.png"></img></th>
-  </tr>
-  
-</table>
-</div>
-<header>
-<h1>Fréquence de rafraichissement</h1>
-<input id= "frequency" type="number" min="200" max="120000" step="200" value="2000" placeholder="En millisecondes">
+        <h1>Choix du réseau</h1>
+        <input id="client" type="checkbox" name="client" value="okay"> Mettre la captobox sur internet<br>
+        <input id="ssid" type="text" placeholder="ssid">
+        <input id="password" type="password" placeholder="mot de passe" />
 
-<h1>Choix du réseau</h1>
-<input id="client" type="checkbox" name="client" value="okay"> Mettre la captobox sur internet<br>
-<input id="ssid" type="text" placeholder="ssid">
-<input id="password" type="password" placeholder="mot de passe"/>
-
-<h1>Requete à envoyer</h1>
-<input id="stream" type="checkbox" name="client" value="okay"> Envoyer les données sur le serveur<br>
-<textarea id= "host" type="text" placeholder="host"></textarea>
-<textarea id= "request" type="text" placeholder="requete"></textarea>
-</header>
-<div id="center">
-<button type="button" onclick= "upload_config()">Uploader la configuration !</button>
-<button onclick="window.location='../config/update.html';">Mise à jour du firmware</button>
-</div>
-
+        <h1>Requete à envoyer</h1>
+        <input id="stream" type="checkbox" name="client" value="okay"> Envoyer les données sur le serveur<br>
+        <textarea id="host" type="text" placeholder="host"></textarea>
+        <textarea id="request" type="text" placeholder="requete"></textarea>
+    </section>
+    <div id="center">
+        <button type="button" onclick="upload_config()">Uploader la configuration !</button>
+        <button onclick="window.location='../config/update.html';">Mise à jour du firmware</button>
+    </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <WString.h>
 #include <Stream.h>
 
@@ -7,8 +8,8 @@ class Config
 {
 public:
 
-	String capt1;
-	String capt2;
+	std::string capt1;
+	std::string capt2;
 	String frequency;
 	String client_mode;
 	String ssid_client;
