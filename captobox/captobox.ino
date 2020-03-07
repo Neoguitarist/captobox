@@ -15,6 +15,7 @@
 #include "src/Config.h"
 #include "src/MOD1023Sensor.h"
 #include "src/BME680Sensor.h"
+#include "src/CCS811Sensor.h"
 #include "src/Measure.h"
 
 const String version = "version beta++";
@@ -22,16 +23,20 @@ const String version = "version beta++";
 Config config;
 MOD1023Sensor mod1023(Serial);
 BME680Sensor bme680(Serial);
+CCS811Sensor ccs811(Serial);
 
 std::unordered_map<std::string, MeasureReader> measureReaders =
 	{
-		{ "bme680_hum", MeasureReader("BME680 - Humidité (%)", Measure::HUMIDITY, 0, 100, []() { return bme680.read_humidity(); }) },
-		{ "bme680_temp", MeasureReader("BME680 - Température (°C)", Measure::TEMPERATURE, -40, 85, []() { return bme680.read_temperature(); }) },
 		{ "mod1023_co2", MeasureReader("MOD1023 - CO2 (ppm)", Measure::CO2, 450, 2000, []() { return mod1023.read_co2(); }) },
 		{ "mod1023_hum", MeasureReader("MOD1023 - Humidité (%)", Measure::HUMIDITY, 0, 100, []() { return mod1023.read_humidity(); }) },
 		{ "mod1023_pres", MeasureReader("MOD1023 - Pression (hPa)", Measure::PRESSURE, 300, 1100, []() { return mod1023.read_pressure(); }) },
 		{ "mod1023_temp", MeasureReader("MOD1023 - Température (°C)", Measure::TEMPERATURE, -40, 85, []() { return mod1023.read_temperature(); }) },
-		{ "mod1023_tvoc", MeasureReader("MOD1023 - TVOC (ppb)", Measure::TVOC, 125, 600, []() { return mod1023.read_tvoc(); }) }
+		{ "mod1023_tvoc", MeasureReader("MOD1023 - TVOC (ppb)", Measure::TVOC, 125, 600, []() { return mod1023.read_tvoc(); }) },
+		{ "bme680_hum", MeasureReader("BME680 - Humidité (%)", Measure::HUMIDITY, 0, 100, []() { return bme680.read_humidity(); }) },
+		{ "bme680_temp", MeasureReader("BME680 - Température (°C)", Measure::TEMPERATURE, -40, 85, []() { return bme680.read_temperature(); }) },
+		{ "ccs811_co2", MeasureReader("CCS811 - CO2 (ppm)", Measure::CO2, 450, 2000, []() { return ccs811.read_co2(); }) },
+		{ "ccs811_temp", MeasureReader("CCS811 - Température (°C)", Measure::TEMPERATURE, -40, 85, []() { return ccs811.read_temperature(); }) },
+		{ "ccs811_tvoc", MeasureReader("CCS811 - TVOC (ppb)", Measure::TVOC, 125, 600, []() { return ccs811.read_tvoc(); }) },
 	};
 
 String save = "false";
@@ -96,6 +101,7 @@ void setup()
 	Serial.println("Initialisation des capteurs... ");
 	mod1023.init();
 	bme680.init();
+	ccs811.init();
 	Serial.println("OK.\n");
 
 	digitalWrite(BUILTIN_LED, HIGH);

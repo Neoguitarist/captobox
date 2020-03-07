@@ -31,8 +31,6 @@ float BME680Sensor::read_humidity()
 	return perform_reading() ? _bme680.humidity : 0;
 };
 
-Adafruit_BME680 _bme680;
-
 bool BME680Sensor::perform_reading()
 {
 	if (!_bme680.performReading())
