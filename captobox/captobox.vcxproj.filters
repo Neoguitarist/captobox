@@ -54,14 +54,14 @@
     <None Include="data\config\config.html">
       <Filter>Misc Files</Filter>
     </None>
-    <None Include="data\config\html5simple.css">
-      <Filter>Misc Files</Filter>
-    </None>
     <None Include="data\config\update.html">
       <Filter>Misc Files</Filter>
     </None>
     <None Include="data\config\config.js" />
     <None Include="captobox.ino" />
+    <None Include="data\config\common.css">
+      <Filter>Misc Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.captobox.vsarduino.h">

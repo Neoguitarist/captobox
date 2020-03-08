@@ -3,69 +3,78 @@
 <head>
     <meta charset="utf-8" />
     <title>Configuration</title>
-    <link rel="stylesheet" href="html5simple.css" type="text/css" />
+    <link rel="stylesheet" href="common.css" type="text/css" />
     <script type="text/javascript" src="config.js"></script>
 </head>
 <body onload="init();">
-    <p id="p1">version</p>
-    <h1>Choix du capteur</h1>
-    <div id="center">
-        <table>
-            <tr>
-                <th>
-                    <label for="capt1">Choix du capteur 1</label>
-                    <select name="capt1" id="liste1">
-                        <option value="mod1023_co2">MOD1023 - CO2</option>
-                        <option value="mod1023_hum">MOD1023 - Humidité</option>
-                        <option value="mod1023_pres">MOD1023 - Pression</option>
-                        <option value="mod1023_temp">MOD1023 - Température</option>
-                        <option value="mod1023_tvoc">MOD1023 - TVOC</option>
-                        <option value="bme680_hum">BME680 - Humidité</option>
-                        <option value="bme680_temp">BME680 - Température</option>
-                        <option value="ccs811_co2">CCS811 - C02</option>
-                        <option value="ccs811_temp">CCS811 - Température</option>
-                        <option value="ccs811_tvoc">CCS811 - TVOC</option>
-                    </select>
-                </th>
-                <th>________________</th>
-                <th>
-                    <label for="capt2">Choix du capteur 2</label>
-                    <select name="capt2" id="liste2">
-                        <option value="mod1023_co2">MOD1023 - CO2</option>
-                        <option value="mod1023_hum">MOD1023 - Humidité</option>
-                        <option value="mod1023_pres">MOD1023 - Pression</option>
-                        <option value="mod1023_temp">MOD1023 - Température</option>
-                        <option value="mod1023_tvoc">MOD1023 - TVOC</option>
-                        <option value="bme680_hum">BME680 - Humidité</option>
-                        <option value="bme680_temp">BME680 - Température</option>
-                        <option value="ccs811_co2">CCS811 - C02</option>
-                        <option value="ccs811_temp">CCS811 - Température</option>
-                        <option value="ccs811_tvoc">CCS811 - TVOC</option>
-                    </select>
-                </th>
-            </tr>
-            <tr>
-                <th colspan="3"><img src="img/capto.png" /></th>
-            </tr>
-        </table>
+    <div>
+        version <span id="p1"></span>
     </div>
-    <section>
-        <h1>Fréquence de rafraichissement</h1>
-        <input id="frequency" type="number" min="200" max="120000" step="200" value="2000" placeholder="En millisecondes">
-
-        <h1>Choix du réseau</h1>
-        <input id="client" type="checkbox" name="client" value="okay"> Mettre la captobox sur internet<br>
-        <input id="ssid" type="text" placeholder="ssid">
-        <input id="password" type="password" placeholder="mot de passe" />
-
-        <h1>Requete à envoyer</h1>
-        <input id="stream" type="checkbox" name="client" value="okay"> Envoyer les données sur le serveur<br>
-        <textarea id="host" type="text" placeholder="host"></textarea>
-        <textarea id="request" type="text" placeholder="requete"></textarea>
-    </section>
-    <div id="center">
-        <button type="button" onclick="save_config()">Uploader la configuration !</button>
-        <button onclick="window.location='../config/update.html';">Mise à jour du firmware</button>
+    <div class="form-group">
+        <h3>Lecture des capteurs</h3>
+        <div class="input-group">
+            <label for="frequency">Fréquence de rafraichissement</label>
+            <input id="frequency" type="number" min="200" max="120000" step="200" value="2000" placeholder="En millisecondes">
+        </div>
+        <div class="sensors-selection">
+            <div class="sensor-selector input-group">
+                <label for="liste1">Lecture 1</label>
+                <select name="capt1" id="liste1">
+                    <option value="mod1023_co2">MOD1023 - CO2</option>
+                    <option value="mod1023_hum">MOD1023 - Humidité</option>
+                    <option value="mod1023_pres">MOD1023 - Pression</option>
+                    <option value="mod1023_temp">MOD1023 - Température</option>
+                    <option value="mod1023_tvoc">MOD1023 - TVOC</option>
+                    <option value="bme680_hum">BME680 - Humidité</option>
+                    <option value="bme680_temp">BME680 - Température</option>
+                    <option value="ccs811_co2">CCS811 - C02</option>
+                    <option value="ccs811_temp">CCS811 - Température</option>
+                    <option value="ccs811_tvoc">CCS811 - TVOC</option>
+                </select>
+            </div>
+            <div class="sensor-selector input-group">
+                <label for="liste2">Lecture 2</label>
+                <select name="capt2" id="liste2">
+                    <option value="mod1023_co2">MOD1023 - CO2</option>
+                    <option value="mod1023_hum">MOD1023 - Humidité</option>
+                    <option value="mod1023_pres">MOD1023 - Pression</option>
+                    <option value="mod1023_temp">MOD1023 - Température</option>
+                    <option value="mod1023_tvoc">MOD1023 - TVOC</option>
+                    <option value="bme680_hum">BME680 - Humidité</option>
+                    <option value="bme680_temp">BME680 - Température</option>
+                    <option value="ccs811_co2">CCS811 - C02</option>
+                    <option value="ccs811_temp">CCS811 - Température</option>
+                    <option value="ccs811_tvoc">CCS811 - TVOC</option>
+                </select>
+            </div>
+        </div>
+        <div class="captobox-picture">
+            <img src="img/capto.png" />
+        </div>
+    </div>
+    <div class="form-group">
+        <h3>Réseau</h3>
+        <div class="input-group">
+            <input id="client" type="checkbox" name="client"> <label for="client">Mettre la captobox sur internet</label>
+        </div>
+        <div class="input-group">
+            <input id="ssid" type="text" placeholder="SSID">
+            <input id="password" type="password" placeholder="mot de passe" />
+        </div>
+    </div>
+    <div class="form-group">
+        <h3>Requête à envoyer</h3>
+        <div class="input-group">
+            <input id="stream" type="checkbox" name="stream"> <label for="stream">Envoyer les données sur le serveur</label>
+        </div>
+        <div class="input-group">
+            <textarea id="host" type="text" placeholder="hôte"></textarea>
+            <textarea id="request" type="text" placeholder="requête"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="button" onclick="save_config();">Uploader la configuration !</button>
+        <button onclick="redirect_to('../config/update.html');">Mise à jour du firmware</button>
     </div>
 </body>
 </html>

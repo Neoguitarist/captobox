@@ -25,7 +25,13 @@ function init()
         version: new Param(new BlockContentRef("p1"), "vers")
     };
 
-    load_config();
+    //load_config();
+}
+
+function redirect_to(url)
+{
+    console.log("[config] redirection vers: " + url);
+    window.location = url;
 }
 
 /**
@@ -80,8 +86,7 @@ function save_config()
         function (responseText)
         {
             /* Redirige vers l'affichage des capteurs, si la sauvegarde a réussi. */
-            console.log("redirection !");
-            window.location = '../index.html';
+            redirect_to('../index.html');
         });
 }
 

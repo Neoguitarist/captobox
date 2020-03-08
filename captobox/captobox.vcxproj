@@ -114,7 +114,7 @@
     <None Include="data\canvasjs.min.js.gz" />
     <None Include="data\chart.html" />
     <None Include="data\config\config.html" />
-    <None Include="data\config\html5simple.css" />
+    <None Include="data\config\common.css" />
     <None Include="data\config\update.html" />
     <None Include="data\index.html" />
     <None Include="data\jquery-1.11.1.min.js.gz" />
