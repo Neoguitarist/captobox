@@ -107,6 +107,7 @@
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="data\config.html" />
     <None Include="data\config\config.js" />
     <None Include="captobox.ino">
       <FileType>CppCode</FileType>
@@ -116,9 +117,15 @@
     <None Include="data\config\config.html" />
     <None Include="data\config\common.css" />
     <None Include="data\config\update.html" />
+    <None Include="data\css\common.css" />
     <None Include="data\index.html" />
     <None Include="data\jquery-1.11.1.min.js.gz" />
     <None Include="data\jsontest.html" />
+    <None Include="data\js\config.js" />
+    <None Include="data\js\jquery-1.7.2.min.js" />
+    <None Include="data\js\justgage.js" />
+    <None Include="data\js\raphael-2.1.4.min.js" />
+    <None Include="data\js\smoothie.js" />
     <None Include="data\justgage.js" />
     <None Include="data\justgage.js.gz" />
     <None Include="data\raphael-2.1.4.min.js" />
@@ -126,6 +133,7 @@
     <None Include="data\save.csv" />
     <None Include="data\smoothie.js" />
     <None Include="data\smoothie.js.gz" />
+    <None Include="data\update.html" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CCS811Sensor.h" />
@@ -147,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="data\config.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\img\capto.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

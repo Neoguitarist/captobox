@@ -142,12 +142,12 @@ void setup_server()
 		{
 			if (!handleFileRead("/index.html")) server.send(404, "text/plain", "FileNotFound");
 		});
-	server.on("/config", HTTP_GET, []()
+	server.on("/config.html", HTTP_GET, []()
 		{
-			if (!handleFileRead("/config/config.html")) server.send(404, "text/plain", "FileNotFound");
+			if (!handleFileRead("/config.html")) server.send(404, "text/plain", "FileNotFound");
 		});
 
-	server.on("/config/write", HTTP_GET, []()
+	server.on("/write", HTTP_GET, []()
 		{
 			File configFile;
 

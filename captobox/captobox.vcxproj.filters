@@ -62,6 +62,14 @@
     <None Include="data\config\common.css">
       <Filter>Misc Files</Filter>
     </None>
+    <None Include="data\config.html" />
+    <None Include="data\update.html" />
+    <None Include="data\js\smoothie.js" />
+    <None Include="data\js\raphael-2.1.4.min.js" />
+    <None Include="data\js\justgage.js" />
+    <None Include="data\js\jquery-1.7.2.min.js" />
+    <None Include="data\js\config.js" />
+    <None Include="data\css\common.css" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.captobox.vsarduino.h">
@@ -113,5 +121,10 @@
     <Text Include="data\config.txt">
       <Filter>Misc Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\img\capto.png">
+      <Filter>Misc Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
