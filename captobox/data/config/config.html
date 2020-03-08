@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="html5simple.css" type="text/css" />
     <script type="text/javascript" src="config.js"></script>
 </head>
-<body onload="get_config()">
+<body onload="init();">
     <p id="p1">version</p>
     <h1>Choix du capteur</h1>
     <div id="center">
@@ -64,7 +64,7 @@
         <textarea id="request" type="text" placeholder="requete"></textarea>
     </section>
     <div id="center">
-        <button type="button" onclick="upload_config()">Uploader la configuration !</button>
+        <button type="button" onclick="save_config()">Uploader la configuration !</button>
         <button onclick="window.location='../config/update.html';">Mise à jour du firmware</button>
     </div>
 </body>

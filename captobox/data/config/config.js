@@ -1,89 +1,186 @@
-var number_items_capt1 = 0;
-var number_items_capt2 = 0;
-var current_draged_capt1 = "";
-var current_draged_capt2 = "";
-var frequency = 2000;
-var xh_serveur = new XMLHttpRequest();
-var config = "/lecture_config";
-var current_draged_choose = "";
-var request = "";
-var ssid = "";
-var client = "";
-var password = "";
-var host = "";
-var stream = "";
-var version = "";
+/** URL à appeler pour récupérer la configuration enregistrée sur le serveur. */
+const URL_LOAD_CONFIG = "/lecture_config";
+/** URL à appeler pour sauvegarder la configuration sur le serveur. */
+const URL_SAVE_CONFIG = "write";
 
-function get_config() {
-    xh_serveur.open("GET", config, true);
+/** Configuration manipulée. */
+var config = null;
 
-    xh_serveur.onreadystatechange = function () {
-        if (xh_serveur.readyState == 4) {
-            if (xh_serveur.status == 200) {
-                var res = JSON.parse(xh_serveur.responseText);
-                client = res.client;
-                ssid = res.ssid_client;
-                password = res.password_client;
-                request = res.request;
-                frequency = res.frequency;
-                host = res.host;
-                stream = res.stream;
-                version = res.vers;
+/**
+ * Initialise la vue de configuration de la Captobox.
+ */
+function init()
+{
+    config =
+    {
+        capt1: new Param(new InputRef("liste1"), "capt1"),
+        capt2: new Param(new InputRef("liste2"), "capt2"),
+        frequency: new Param(new InputRef("frequency"), "frequency", 2000),
+        client: new Param(new CheckboxRef("client"), "client"),
+        request: new Param(new InputRef("request"), "request"),
+        host: new Param(new InputRef("host"), "host"),
+        ssid: new Param(new InputRef("ssid"), "ssid"),
+        password: new Param(new InputRef("password"), "password"),
+        stream: new Param(new CheckboxRef("stream"), "stream"),
+        version: new Param(new BlockContentRef("p1"), "vers")
+    };
 
-                //current_draged_capt1=res.capt1;
-                //current_draged_capt2=res.capt2;
-                if (client == "true") {
-                    document.getElementById('client').checked = true;
+    load_config();
+}
+
+/**
+ * Charge la configuration enregistrée sur le serveur.
+ */
+function load_config()
+{
+    /* Envoi une requête pour récupérer la configuration enregistrée sur le serveur. */
+    call_url(URL_LOAD_CONFIG,
+        function (responseText)
+        {
+            let jsonData = JSON.parse(responseText);
+
+            /* Chargement de la configuration reçue. */
+            Object.keys(config)
+                .forEach(
+                    function (paramName)
+                    {
+                        let param = config[paramName];
+                        param.set(jsonData[param.jsonEntryName]);
+                    });
+
+            console.log("Configuration chargée (version " + config.version + ").");
+        });
+}
+
+/**
+ * Enregistre l'état actuel de la configuration sur le serveur.
+ */
+function save_config()
+{
+    /* Construction de la chaîne de paramètres d'URL définissant la configuration actuelle. */
+    let configUrlParams =
+        Object.keys(config)
+            .map(
+                function (paramName)
+                {
+                    return encodeURIComponent(paramName) + "=" + encodeURIComponent(config[paramName].get());
+                })
+            .join('&');
+
+    /* Écriture de la configuration actuelle sur la console. */
+    Object.keys(config)
+        .forEach(
+            function (paramName)
+            {
+                console.log("[config] " + paramName + " = " + config[paramName].get());
+            });
+
+    /* Envoi de la requête de sauvegarde. */
+    call_url(URL_SAVE_CONFIG + "?" + configUrlParams,
+        function (responseText)
+        {
+            /* Redirige vers l'affichage des capteurs, si la sauvegarde a réussi. */
+            console.log("redirection !");
+            window.location = '../index.html';
+        });
+}
+
+/**
+ * Appelle l'URL donnée, et exécute la fonction donnée si le statut de la réponse est OK (code HTTP 200).
+ * 
+ * @param {string} url URL sur laquelle envoyer une requête.
+ * @param {Function} onSuccess Fonction à appeler en cas de réussite.
+ */
+function call_url(url, onSuccess)
+{
+    let request = new XMLHttpRequest();
+
+    /* Préparation de la requête. */
+    request.open("GET", url, true);
+
+    request.onreadystatechange =
+        function ()
+        {
+            /* Si la réponse du serveur a été reçue. */
+            if (request.readyState === 4)
+            {
+                /* Si le statut de la réponse est OK. */
+                if (request.status === 200)
+                {
+                    onSuccess(request.responseText);
                 }
-                if (stream == "true") {
-                    document.getElementById('stream').checked = true;
+                else
+                {
+                    alert("Une erreur est survenue:\n" + request.responseText);
                 }
-                document.getElementById('ssid').value = ssid;
-                document.getElementById('password').value = password;
-                document.getElementById('request').value = request;
-                document.getElementById('frequency').value = frequency;
-                document.getElementById('host').value = host;
-                document.getElementById('p1').innerHTML = version;
-
-                //document.getElementById('capt1').name = current_draged_capt1;
-                //document.getElementById('capt2').value = current_draged_capt2;
-                //console.log(current_draged_capt1);
-                console.log(version);
-                console.log("configuration chargée");
-
             }
-        }
-    }
+        };
 
-    xh_serveur.send(null);
+    console.log(url);
+
+    /* Envoi de la requête. */
+    request.send(null);
 }
 
-function upload_config(e) {
-    frequency = document.getElementById('frequency').value;
-    client = document.getElementById('client').checked;
-    stream = document.getElementById('stream').checked;
-    ssid = document.getElementById('ssid').value;
-    password = document.getElementById('password').value;
-    host = document.getElementById('host').value;
-    request = document.getElementById('request').value;
+/**
+ * Paramètre de configuration.
+ * 
+ * @param {Object} valueRef Référence vers un élément HTML, affichant la valeur de ce paramètre.
+ * @param {string} jsonEntryName Nom de l'entrée JSON associée à ce paramètre.
+ * @param {string} defaultValue Valeur par défaut pour ce paramètre.
+ */
+function Param(valueRef, jsonEntryName, defaultValue = "")
+{
+    this.valueRef = valueRef;
+    this.jsonEntryName = jsonEntryName;
+    this.get = function () { return this.valueRef.get(); };
+    this.set = function (newValue) { this.valueRef.set(newValue); };
 
-    console.log("capteur 1 : " + liste1.options[liste1.selectedIndex].value);
-    console.log("capteur 2 : " + liste2.options[liste2.selectedIndex].value);
-    var envoi_config = "write?capt1=" + liste1.options[liste1.selectedIndex].value + "&capt2=" + liste2.options[liste2.selectedIndex].value + "&frequency=" + frequency + "&client=" + client + "&ssid=" + ssid + "&password=" + password + "&request=" + request + "&host=" + host + "&stream=" + stream;
-    console.log(envoi_config);
-    httpGet(envoi_config);
-
-    setTimeout(goback(), 6000);
+    this.set(defaultValue);
 }
 
-function httpGet(theUrl) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", theUrl, false); // false for synchronous request
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
+/**
+ * Référence vers une variable JS, non liée à un élément HTML.
+ */
+function NoRef()
+{
+    this.value = "";
+    this.get = function () { return this.value; };
+    this.set = function (newValue) { this.value = newValue; };
 }
 
-function goback() {
-    console.log("redirection !");
-    window.location = '../index.html';
+/**
+ * Référence vers un champ de saisie de formulaire.
+ *
+ * @param {string} formFieldId Identifiant du champ de saisie ciblé.
+ */
+function InputRef(formFieldId)
+{
+    this.formFieldId = formFieldId;
+    this.get = function () { return document.getElementById(this.formFieldId).value; };
+    this.set = function (newValue) { document.getElementById(this.formFieldId).value = newValue; };
+}
+
+/**
+ * Référence vers une case à cocher.
+ * 
+ * @param {string} checkboxId Identifiant de la case à cocher ciblée.
+ */
+function CheckboxRef(checkboxId)
+{
+    this.checkboxId = checkboxId;
+    this.get = function () { return document.getElementById(this.checkboxId).checked; };
+    this.set = function (newValue) { document.getElementById(this.checkboxId).checked = (newValue === true || newValue === "true"); };
+}
+
+/**
+ * Référence vers un bloc de texte.
+ * 
+ * @param {string} blockId Identifiant du bloc ciblée.
+ */
+function BlockContentRef(blockId)
+{
+    this.blockId = blockId;
+    this.get = function () { return document.getElementById(blockId).innerHTML; };
+    this.set = function (newValue) { document.getElementById(blockId).innerHTML = newValue; };
 }
