@@ -1,8 +1,8 @@
 **Introduction**
 
 Ce GitHub est basé sur celui de Julien Rat : https://github.com/julienrat/captobox .
-Le code a été fortement restructuré, et de nouveaux capteurs sont pris en charge.
 
+Le code a été fortement restructuré, et de nouveaux capteurs sont pris en charge.
 
 **Capteurs pris en charge actuellement**
 
@@ -12,13 +12,11 @@ Le code a été fortement restructuré, et de nouveaux capteurs sont pris en cha
 - BME680 : https://joy-it.net/en/products/SEN-BME680
 - CCS811 : https://joy-it.net/en/products/SEN-CCS811V1
 
-
 **Prise en main**
 
 Dans le dossier "resources/prise en main", vous trouverez deux documents essentiels :
 - "Description matos.pdf" : liste avec photos de l'ensemble du matériel constituant une Captobox.
 - "Branchements captobox.pdf" : guide pour le branchement des différents capteurs sur le module cerveau.
-
 
 **Note importante**
 
