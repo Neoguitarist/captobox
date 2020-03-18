@@ -1,0 +1,347 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:SeeedOPL-Capacitor-2016
+LIBS:SeeedOPL-Connector-2016
+LIBS:SeeedOPL-Crystal Oscillator-2016
+LIBS:SeeedOPL-Diode-2016
+LIBS:SeeedOPL-Display-2016
+LIBS:SeeedOPL-Fuse-2016
+LIBS:SeeedOPL-IC-2016
+LIBS:SeeedOPL-Inductor-2016
+LIBS:SeeedOPL-LED-2016
+LIBS:SeeedOPL-Relay-2016
+LIBS:SeeedOPL-Resistor-2016
+LIBS:SeeedOPL-Sensor-2016
+LIBS:SeeedOPL-Switch-2016
+LIBS:SeeedOPL-Transistor-2016
+LIBS:wemos_mini
+LIBS:captobox-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L WeMos_mini U1
+U 1 1 59CB5912
+P 5100 2700
+F 0 "U1" H 5100 3200 60  0000 C CNN
+F 1 "WeMos_mini" H 5100 2200 60  0000 C CNN
+F 2 "wemos-d1-mini:wemos-d1-mini-with-pin-header-and-connector" H 5650 2000 60  0001 C CNN
+F 3 "" H 5650 2000 60  0000 C CNN
+	1    5100 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_ K1
+U 1 1 59CB5C4A
+P 5050 3700
+F 0 "K1" H 4850 3900 45  0000 L BNN
+F 1 "DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_" H 4850 3450 45  0000 L BNN
+F 2 "SeeedOPL-Switch-2016:SW4-6.0X6.0X5.0MM" H 5050 3700 60  0001 C CNN
+F 3 "" H 5050 3700 60  0001 C CNN
+F 4 "311020024" H 5080 3850 20  0001 C CNN "SKU"
+	1    5050 3700
+	1    0    0    -1  
+$EndComp
+$Comp
+L GROVE-CONNECTOR-DIP-90D_4P-2.0_ J2
+U 1 1 59CB5D60
+P 7750 1500
+F 0 "J2" H 7500 1750 45  0000 L BNN
+F 1 "GROVE-CONNECTOR-DIP-90D_4P-2.0_" H 7750 1750 45  0000 L BNN
+F 2 "SeeedOPL-Connector-2016:HW4-2.0-90D" H 7750 1500 60  0001 C CNN
+F 3 "" H 7750 1500 60  0001 C CNN
+F 4 "320110034" H 7780 1650 20  0001 C CNN "SKU"
+	1    7750 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L GROVE-CONNECTOR-DIP-90D_4P-2.0_ J1
+U 1 1 59CB5F49
+P 4900 1250
+F 0 "J1" H 4650 1500 45  0000 L BNN
+F 1 "GROVE-CONNECTOR-DIP-90D_4P-2.0_" H 4900 1500 45  0000 L BNN
+F 2 "SeeedOPL-Connector-2016:HW4-2.0-90D" H 4900 1250 60  0001 C CNN
+F 3 "" H 4900 1250 60  0001 C CNN
+F 4 "320110034" H 4930 1400 20  0001 C CNN "SKU"
+	1    4900 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_ R3
+U 1 1 59CB6140
+P 7250 1350
+F 0 "R3" H 7100 1400 45  0000 L BNN
+F 1 "100K" H 7100 1250 45  0000 L BNN
+F 2 "SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM" H 7250 1350 40  0001 C CNN
+F 3 "" H 7250 1350 40  0001 C CNN
+F 4 "FHCFR-1_4W-103J" H 7280 1500 20  0001 C CNN "MPN"
+F 5 "301020001" H 7280 1500 20  0001 C CNN "SKU"
+	1    7250 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_ R2
+U 1 1 59CB61FC
+P 6800 1350
+F 0 "R2" H 6650 1400 45  0000 L BNN
+F 1 "100K" H 6650 1250 45  0000 L BNN
+F 2 "SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM" H 6800 1350 40  0001 C CNN
+F 3 "" H 6800 1350 40  0001 C CNN
+F 4 "FHCFR-1_4W-103J" H 6830 1500 20  0001 C CNN "MPN"
+F 5 "301020001" H 6830 1500 20  0001 C CNN "SKU"
+	1    6800 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_ R1
+U 1 1 59CB6256
+P 6350 1350
+F 0 "R1" H 6200 1400 45  0000 L BNN
+F 1 "100K" H 6200 1250 45  0000 L BNN
+F 2 "SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM" H 6350 1350 40  0001 C CNN
+F 3 "" H 6350 1350 40  0001 C CNN
+F 4 "FHCFR-1_4W-103J" H 6380 1500 20  0001 C CNN "MPN"
+F 5 "301020001" H 6380 1500 20  0001 C CNN "SKU"
+	1    6350 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIP-BLACK-MALE-HEADER-VERT_3P-2.54_ CN1
+U 1 1 59CB64BA
+P 3650 2050
+F 0 "CN1" H 3350 2300 45  0000 L BNN
+F 1 "DIP-BLACK-MALE-HEADER-VERT_3P-2.54_" H 3600 2300 45  0000 L BNN
+F 2 "SeeedOPL-Connector-2016:H3-2.54" H 3650 2050 60  0001 C CNN
+F 3 "" H 3650 2050 60  0001 C CNN
+F 4 "320020079" H 3680 2200 20  0001 C CNN "SKU"
+	1    3650 2050
+	1    0    0    -1  
+$EndComp
+Text GLabel 4500 2350 0    60   Input ~ 0
+5V
+$Comp
+L WeMos_mini U2
+U 1 1 59CB7013
+P 9200 2650
+F 0 "U2" H 9200 3150 60  0000 C CNN
+F 1 "Shield_bat" H 9200 2150 60  0000 C CNN
+F 2 "wemos-d1-mini:wemos-d1-mini-with-pin-header-and-connector" H 9750 1950 60  0001 C CNN
+F 3 "" H 9750 1950 60  0000 C CNN
+	1    9200 2650
+	1    0    0    -1  
+$EndComp
+Text GLabel 6750 2750 0    60   Output ~ 0
+5V
+Text GLabel 8600 2400 0    60   Output ~ 0
+GND
+Text GLabel 4500 2450 0    60   Input ~ 0
+GND
+Wire Wire Line
+	4500 2350 4600 2350
+Wire Wire Line
+	8700 2400 8600 2400
+Wire Wire Line
+	4500 2450 4600 2450
+Text GLabel 4600 3600 0    60   Input ~ 0
+GND
+Text GLabel 4600 3800 0    60   Input ~ 0
+D3
+Text GLabel 4500 2650 0    60   Input ~ 0
+D3
+Text GLabel 4500 2950 0    60   Input ~ 0
+RX
+Text GLabel 4500 3050 0    60   Input ~ 0
+TX
+Text GLabel 4500 2850 0    60   Input ~ 0
+GPIO5
+Text GLabel 4500 2750 0    60   Input ~ 0
+GPIO4
+Text GLabel 7350 1550 0    60   Input ~ 0
+GPIO4
+Text GLabel 7350 1650 0    60   Input ~ 0
+3,3V
+Text GLabel 7350 1750 0    60   Input ~ 0
+GND
+Wire Wire Line
+	7600 1450 7400 1450
+Wire Wire Line
+	7400 1450 7400 1550
+Wire Wire Line
+	7400 1550 7350 1550
+Wire Wire Line
+	7600 1550 7450 1550
+Wire Wire Line
+	7450 1550 7450 1650
+Wire Wire Line
+	7450 1650 7350 1650
+Wire Wire Line
+	7600 1650 7500 1650
+Wire Wire Line
+	7500 1650 7500 1750
+Wire Wire Line
+	7500 1750 7350 1750
+Text GLabel 7500 1150 1    60   Input ~ 0
+GPIO5
+Wire Wire Line
+	7400 1350 7600 1350
+Wire Wire Line
+	7100 1350 6950 1350
+Wire Wire Line
+	6500 1350 6650 1350
+Text GLabel 6050 1350 0    60   Input ~ 0
+GND
+Wire Wire Line
+	6200 1350 6050 1350
+Text GLabel 6550 1200 1    60   Input ~ 0
+A0
+Wire Wire Line
+	6550 1200 6550 1350
+Connection ~ 6550 1350
+Wire Wire Line
+	7500 1150 7500 1350
+Connection ~ 7500 1350
+Text GLabel 5750 2950 2    60   Input ~ 0
+A0
+Text GLabel 5700 2350 2    60   Input ~ 0
+3,3V
+Text GLabel 4650 1100 0    60   Input ~ 0
+RX
+Text GLabel 4650 1200 0    60   Input ~ 0
+TX
+Text GLabel 4650 1300 0    60   Input ~ 0
+3,3V
+Text GLabel 4650 1400 0    60   Input ~ 0
+GND
+Wire Wire Line
+	4750 1100 4650 1100
+Wire Wire Line
+	4750 1200 4650 1200
+Wire Wire Line
+	4750 1300 4650 1300
+Wire Wire Line
+	4750 1400 4650 1400
+Wire Wire Line
+	4600 2650 4500 2650
+Wire Wire Line
+	4600 2750 4500 2750
+Wire Wire Line
+	4600 2850 4500 2850
+Wire Wire Line
+	4600 2950 4500 2950
+Wire Wire Line
+	4600 3050 4500 3050
+Wire Wire Line
+	5600 2950 5750 2950
+Wire Wire Line
+	5600 2350 5700 2350
+Text GLabel 3250 1900 0    60   Input ~ 0
+5V
+Text GLabel 3250 2050 0    60   Input ~ 0
+GND
+Text GLabel 3250 2200 0    60   Input ~ 0
+D4
+Text GLabel 4500 2550 0    60   Input ~ 0
+D4
+Wire Wire Line
+	4500 2550 4600 2550
+Text GLabel 8600 2300 0    60   Output ~ 0
+VCC
+Text GLabel 6800 2850 0    60   Input ~ 0
+VCC
+Wire Wire Line
+	8700 2300 8600 2300
+$Comp
+L DIP-TOGGLE-SWITCH-ON-ON_3+2P-8.8X4.6MM_-90D SW1
+U 1 1 59CB8D80
+P 7350 2750
+F 0 "SW1" H 7200 3000 45  0000 L BNN
+F 1 "DIP-TOGGLE-SWITCH-ON-ON_3+2P-8.8X4.6MM_-90D" H 7200 2450 45  0000 L BNN
+F 2 "SeeedOPL-Switch-2016:SW5-2.0-8.8X4.4X4.7MM-90D" H 7350 2750 60  0001 C CNN
+F 3 "" H 7350 2750 60  0001 C CNN
+F 4 "3P-2.0-90D3P-2.0-90D-REINFORCE" H 7380 2900 20  0001 C CNN "MPN"
+F 5 "311030008" H 7380 2900 20  0001 C CNN "SKU"
+	1    7350 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3350 2200 3250 2200
+Wire Wire Line
+	4700 3600 4600 3600
+Wire Wire Line
+	4700 3800 4600 3800
+Wire Wire Line
+	3350 2050 3250 2050
+Wire Wire Line
+	3250 1900 3350 1900
+NoConn ~ 8700 2500
+NoConn ~ 8700 2600
+NoConn ~ 8700 2700
+NoConn ~ 8700 2800
+NoConn ~ 8700 2900
+NoConn ~ 8700 3000
+NoConn ~ 9700 3000
+NoConn ~ 9700 2900
+NoConn ~ 9700 2800
+NoConn ~ 9700 2700
+NoConn ~ 9700 2600
+NoConn ~ 9700 2500
+NoConn ~ 9700 2400
+NoConn ~ 9700 2300
+NoConn ~ 5600 2450
+NoConn ~ 5600 2550
+NoConn ~ 5600 2650
+NoConn ~ 5600 2750
+NoConn ~ 5600 2850
+NoConn ~ 5600 3050
+NoConn ~ 5400 3800
+NoConn ~ 5400 3600
+NoConn ~ 7000 2950
+NoConn ~ 7000 2550
+NoConn ~ 7000 2650
+Wire Wire Line
+	6750 2750 7000 2750
+Wire Wire Line
+	7000 2850 6800 2850
+$EndSCHEMATC

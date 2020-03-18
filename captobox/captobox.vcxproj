@@ -80,7 +80,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)..\captobox;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266WiFi\src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266WebServer\src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266mDNS;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266httpUpdate\src;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\ESP8266HTTPClient\src;$(ProjectDir)..\..\libraries\Time;$(ProjectDir)..\..\libraries\elapsedMillis;$(ProjectDir)..\..\libraries\OneButton\src;$(ProjectDir)..\..\libraries\Adafruit_NeoPixel;$(ProjectDir)..\..\libraries\MOD-1023-master;$(ProjectDir)..\..\libraries\BlueDot_BME280_Library;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\Wire;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\libraries\SPI;$(ProjectDir)..\..\libraries\Adafruit_BME680_Library;$(ProjectDir)..\..\libraries\Adafruit_Unified_Sensor;$(ProjectDir)..\..\libraries\Adafruit_CCS811_Library;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\libb64;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\spiffs;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\cores\esp8266\umm_malloc;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\variants\d1_mini;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\lwip2\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\libc\xtensa-lx106-elf\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\xtensa-lx106-elf\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\1.20.0-26-gb404fb9-2\lib\gcc\xtensa-lx106-elf\4.8.2\include;C:\Users\UltimatePower\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.0\tools\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.captobox.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <IgnoreStandardIncludePath>true</IgnoreStandardIncludePath>
-      <PreprocessorDefinitions>__ESP8266_esp8266__;__ESP8266_ESP8266__;_VMDEBUG=1;__ets__;ICACHE_FLASH;F_CPU=80000000L;LWIP_OPEN_SRC;TCP_MSS=536;ARDUINO=108012;ARDUINO_ESP8266_WEMOS_D1MINI;ARDUINO_ARCH_ESP8266;ESP8266;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__ESP8266_esp8266__;__ESP8266_ESP8266__;_VMDEBUG=1;__ets__;ICACHE_FLASH;F_CPU=80000000L;LWIP_OPEN_SRC;TCP_MSS=536;DEBUG_ESP_PORT=Serial;ARDUINO=108012;ARDUINO_ESP8266_WEMOS_D1MINI;ARDUINO_ARCH_ESP8266;ESP8266;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -136,6 +137,7 @@
     <None Include="data\update.html" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\I2CHub.h" />
     <ClInclude Include="src\CCS811Sensor.h" />
     <ClInclude Include="src\BME680Sensor.h" />
     <ClInclude Include="src\MOD1023Sensor.h" />
@@ -146,6 +148,7 @@
     <ClInclude Include="__vm\.captobox.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\I2CHub.cpp" />
     <ClCompile Include="src\CCS811Sensor.cpp" />
     <ClCompile Include="src\BME680Sensor.cpp" />
     <ClCompile Include="src\MOD1023Sensor.cpp" />
@@ -164,7 +167,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties config.Debug.customdebug_esp8266_d1_mini_debugger_type="universal" custom_esp8266_d1_mini_Debug="Disabled" />
+      <UserProperties config.Debug.customdebug_esp8266_d1_mini_debugger_type="universal" custom_esp8266_d1_mini_Debug="Serial" arduino.upload.port="COM4" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

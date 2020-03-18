@@ -1,0 +1,91 @@
+Cmp-Mod V01 Created by PcbNew   date = mer. 11 oct. 2017 13:48:02 CEST
+
+BeginCmp
+TimeStamp = 59CB7296
+Path = /59CB7013
+Reference = U2;
+ValeurCmp = Shield_bat;
+IdModule  = wemos-d1-mini:wemos-d1-mini-with-pin-header-and-connector;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB7283
+Path = /59CB5912
+Reference = U1;
+ValeurCmp = WeMos_mini;
+IdModule  = wemos-d1-mini:wemos-d1-mini-with-pin-header-and-connector;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB6580
+Path = /59CB5F49
+Reference = J1;
+ValeurCmp = GROVE-CONNECTOR-DIP-90D_4P-2.0_;
+IdModule  = SeeedOPL-Connector-2016:HW4-2.0-90D;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB6578
+Path = /59CB64BA
+Reference = CN1;
+ValeurCmp = DIP-BLACK-MALE-HEADER-VERT_3P-2.54_;
+IdModule  = SeeedOPL-Connector-2016:H3-2.54;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB6588
+Path = /59CB5D60
+Reference = J2;
+ValeurCmp = GROVE-CONNECTOR-DIP-90D_4P-2.0_;
+IdModule  = SeeedOPL-Connector-2016:HW4-2.0-90D;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB6590
+Path = /59CB5C4A
+Reference = K1;
+ValeurCmp = DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_;
+IdModule  = SeeedOPL-Switch-2016:SW4-6.0X6.0X5.0MM;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB6596
+Path = /59CB6256
+Reference = R1;
+ValeurCmp = 100K;
+IdModule  = SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB659C
+Path = /59CB61FC
+Reference = R2;
+ValeurCmp = 100K;
+IdModule  = SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB65A2
+Path = /59CB6140
+Reference = R3;
+ValeurCmp = 100K;
+IdModule  = SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = 59CB68FD
+Path = /59CB8D80
+Reference = SW1;
+ValeurCmp = DIP-TOGGLE-SWITCH-ON-ON_3+2P-8.8X4.6MM_-90D;
+IdModule  = SeeedOPL-Switch-2016:SW5-2.0-8.8X4.4X4.7MM-90D;
+EndCmp
+
+BeginCmp
+TimeStamp = 59DE6671
+Path = 
+Reference = G***;
+ValeurCmp = LOGO;
+IdModule  = silk:captosilk5;
+EndCmp
+
+EndListe

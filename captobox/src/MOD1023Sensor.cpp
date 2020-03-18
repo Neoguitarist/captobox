@@ -2,7 +2,7 @@
 
 MOD1023Sensor::MOD1023Sensor(Stream& logOutput) :
 	Sensor(logOutput, "MOD1023")
-{ }
+{}
 
 void MOD1023Sensor::init()
 {
@@ -39,6 +39,7 @@ float MOD1023Sensor::read_co2()
 
 void MOD1023Sensor::init_bme280()
 {
+	/* Paramétrage de base, récupéré dans le code d'exemple de la documentation du capteur. */
 	_bme280.parameter.communication = 0;
 	_bme280.parameter.I2CAddress = 0x76;
 	_bme280.parameter.sensorMode = 0b11;
@@ -46,7 +47,11 @@ void MOD1023Sensor::init_bme280()
 	_bme280.parameter.humidOversampling = 0b101;
 	_bme280.parameter.tempOversampling = 0b101;
 	_bme280.parameter.pressOversampling = 0b101;
-	_bme280.init();
+
+	if (_bme280.init() != 0x60)
+	{
+		log("Could not find a valid sensor, check wiring!");
+	}
 }
 
 void MOD1023Sensor::init_iaq()

@@ -1,17 +1,20 @@
 #pragma once
 
-#include <bme680_defs.h>
-#include <bme680.h>
 #include <Adafruit_BME680.h>
 
 #include "Sensor.h"
-#include "Measure.h"
 
+/**
+ * Capteur BME680.
+ */
 class BME680Sensor :
 	Sensor
 {
 public:
 
+	/**
+	 * @param {logOutput} Flux sur lequel le capteur pourr écrire des messages de log.
+	 */
 	BME680Sensor(Stream& logOutput);
 
 	void init();
@@ -21,7 +24,13 @@ public:
 
 private:
 
+	/** Implémentation sous-jacente. */
 	Adafruit_BME680 _bme680;
 
+	/**
+	 * Tente d'effectuer un relevé sur le capteur.
+	 *
+	 * @returns Vrai si le relevé a pu être fait, faux sinon.
+	 */
 	bool perform_reading();
 };

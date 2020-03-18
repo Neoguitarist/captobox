@@ -1,11 +1,12 @@
 #include "CCS811Sensor.h"
 
-CCS811Sensor::CCS811Sensor(Stream& logOutput) :
+CCS811Sensor::CCS811Sensor(Stream& logOutput, size_t repeatDelay,
+	size_t calibrationTimeout, size_t readingTimeout) :
 	Sensor(logOutput, "CCS811")
 {
-	_repeatDelay = 50;
-	_calibrationTimeout = 5000;
-	_readingTimeout = 1000;
+	_repeatDelay = repeatDelay;
+	_calibrationTimeout = calibrationTimeout;
+	_readingTimeout = readingTimeout;
 }
 
 void CCS811Sensor::init()

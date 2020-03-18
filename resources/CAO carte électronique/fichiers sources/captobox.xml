@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/home/julo/Developpement/Kicad/captobox/captobox.sch</source>
+    <date>mer. 27 sept. 2017 10:45:07 CEST</date>
+    <tool>Eeschema 4.0.7</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title/>
+        <company/>
+        <rev/>
+        <date/>
+        <source>captobox.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U1">
+      <value>WeMos_mini</value>
+      <footprint>wemos_d1_mini:D1_mini_board</footprint>
+      <libsource lib="wemos_mini" part="WeMos_mini"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB5912</tstamp>
+    </comp>
+    <comp ref="K1">
+      <value>DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_</value>
+      <footprint>SeeedOPL-Switch-2016:SW4-6.0X6.0X5.0MM</footprint>
+      <fields>
+        <field name="SKU">311020024</field>
+      </fields>
+      <libsource lib="SeeedOPL-Switch-2016" part="DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB5C4A</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>GROVE-CONNECTOR-DIP-90D_4P-2.0_</value>
+      <footprint>SeeedOPL-Connector-2016:HW4-2.0-90D</footprint>
+      <fields>
+        <field name="SKU">320110034</field>
+      </fields>
+      <libsource lib="SeeedOPL-Connector-2016" part="GROVE-CONNECTOR-DIP-90D_4P-2.0_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB5D60</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>GROVE-CONNECTOR-DIP-90D_4P-2.0_</value>
+      <footprint>SeeedOPL-Connector-2016:HW4-2.0-90D</footprint>
+      <fields>
+        <field name="SKU">320110034</field>
+      </fields>
+      <libsource lib="SeeedOPL-Connector-2016" part="GROVE-CONNECTOR-DIP-90D_4P-2.0_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB5F49</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>100K</value>
+      <footprint>SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM</footprint>
+      <fields>
+        <field name="MPN">FHCFR-1_4W-103J</field>
+        <field name="SKU">301020001</field>
+      </fields>
+      <libsource lib="SeeedOPL-Resistor-2016" part="DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB6140</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>100K</value>
+      <footprint>SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM</footprint>
+      <fields>
+        <field name="MPN">FHCFR-1_4W-103J</field>
+        <field name="SKU">301020001</field>
+      </fields>
+      <libsource lib="SeeedOPL-Resistor-2016" part="DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB61FC</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>100K</value>
+      <footprint>SeeedOPL-Resistor-2016:PR-D2.3XL6.5MM</footprint>
+      <fields>
+        <field name="MPN">FHCFR-1_4W-103J</field>
+        <field name="SKU">301020001</field>
+      </fields>
+      <libsource lib="SeeedOPL-Resistor-2016" part="DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB6256</tstamp>
+    </comp>
+    <comp ref="CN1">
+      <value>DIP-BLACK-MALE-HEADER-VERT_3P-2.54_</value>
+      <footprint>SeeedOPL-Connector-2016:H3-2.54</footprint>
+      <fields>
+        <field name="SKU">320020079</field>
+      </fields>
+      <libsource lib="SeeedOPL-Connector-2016" part="DIP-BLACK-MALE-HEADER-VERT_3P-2.54_"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB64BA</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>Shield_bat</value>
+      <footprint>wemos_d1_mini:D1_mini_board</footprint>
+      <libsource lib="wemos_mini" part="WeMos_mini"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>59CB7013</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="SeeedOPL-Connector-2016" part="DIP-BLACK-MALE-HEADER-VERT_3P-2.54_">
+      <footprints>
+        <fp>*H3-2.54*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">CN</field>
+        <field name="Value">DIP-BLACK-MALE-HEADER-VERT_3P-2.54_</field>
+        <field name="SKU">320020079</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P$1" type="BiDi"/>
+        <pin num="2" name="P$2" type="BiDi"/>
+        <pin num="3" name="P$3" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SeeedOPL-Resistor-2016" part="DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_">
+      <footprints>
+        <fp>*PR-D2.3XL6.5MM*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">DIP-RES-10K-5%-1_4W_PR-D2.3XL6.5MM_</field>
+        <field name="MPN">FHCFR-1_4W-103J</field>
+        <field name="SKU">301020001</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SeeedOPL-Switch-2016" part="DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_">
+      <footprints>
+        <fp>*SW4-6.0X6.0X5.0MM*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">K</field>
+        <field name="Value">DIP-SWITCH-TACTILE-SPST-NO_TS-1109_4P-D6.0MM_</field>
+        <field name="SKU">311020024</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A0" type="BiDi"/>
+        <pin num="2" name="B0" type="BiDi"/>
+        <pin num="3" name="B1" type="BiDi"/>
+        <pin num="4" name="A1" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SeeedOPL-Connector-2016" part="GROVE-CONNECTOR-DIP-90D_4P-2.0_">
+      <footprints>
+        <fp>*HW4-2.0-90D*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">GROVE-CONNECTOR-DIP-90D_4P-2.0_</field>
+        <field name="SKU">320110034</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="BiDi"/>
+        <pin num="2" name="2" type="BiDi"/>
+        <pin num="3" name="3" type="BiDi"/>
+        <pin num="4" name="4" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="wemos_mini" part="WeMos_mini">
+      <description>WeMos D1 mini</description>
+      <docs>http://www.wemos.cc/Products/d1_mini.html</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">WeMos_mini</field>
+      </fields>
+      <pins>
+        <pin num="1" name="5V" type="power_in"/>
+        <pin num="2" name="GND" type="power_in"/>
+        <pin num="3" name="D4" type="BiDi"/>
+        <pin num="4" name="D3" type="BiDi"/>
+        <pin num="5" name="D2" type="BiDi"/>
+        <pin num="6" name="D1" type="BiDi"/>
+        <pin num="7" name="Rx" type="BiDi"/>
+        <pin num="8" name="Tx" type="BiDi"/>
+        <pin num="9" name="Rst" type="BiDi"/>
+        <pin num="10" name="A0" type="BiDi"/>
+        <pin num="11" name="D0" type="BiDi"/>
+        <pin num="12" name="D5" type="BiDi"/>
+        <pin num="13" name="D6" type="BiDi"/>
+        <pin num="14" name="D7" type="BiDi"/>
+        <pin num="15" name="D8" type="BiDi"/>
+        <pin num="16" name="3.3V" type="power_out"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="wemos_mini">
+      <uri>/usr/share/kicad/library/wemos_mini.lib</uri>
+    </library>
+    <library logical="SeeedOPL-Connector-2016">
+      <uri>/usr/share/kicad/library/SeeedOPL-Connector-2016.lib</uri>
+    </library>
+    <library logical="SeeedOPL-Resistor-2016">
+      <uri>/usr/share/kicad/library/SeeedOPL-Resistor-2016.lib</uri>
+    </library>
+    <library logical="SeeedOPL-Switch-2016">
+      <uri>/usr/share/kicad/library/SeeedOPL-Switch-2016.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="GPIO4">
+      <node ref="U1" pin="5"/>
+      <node ref="J2" pin="2"/>
+    </net>
+    <net code="2" name="A0">
+      <node ref="R2" pin="1"/>
+      <node ref="R1" pin="2"/>
+      <node ref="U1" pin="10"/>
+    </net>
+    <net code="3" name="GND">
+      <node ref="J1" pin="4"/>
+      <node ref="J2" pin="4"/>
+      <node ref="R1" pin="1"/>
+      <node ref="CN1" pin="3"/>
+      <node ref="U2" pin="2"/>
+      <node ref="U1" pin="2"/>
+    </net>
+    <net code="4" name="Net-(R2-Pad2)">
+      <node ref="R3" pin="1"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="5" name="3,3V">
+      <node ref="J1" pin="3"/>
+      <node ref="U1" pin="16"/>
+      <node ref="J2" pin="3"/>
+    </net>
+    <net code="6" name="TX">
+      <node ref="U1" pin="8"/>
+      <node ref="J1" pin="2"/>
+    </net>
+    <net code="7" name="RX">
+      <node ref="J1" pin="1"/>
+      <node ref="U1" pin="7"/>
+    </net>
+    <net code="8" name="D3">
+      <node ref="U1" pin="4"/>
+    </net>
+    <net code="9" name="D4">
+      <node ref="CN1" pin="2"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="10" name="5V">
+      <node ref="U2" pin="1"/>
+      <node ref="CN1" pin="1"/>
+      <node ref="U1" pin="1"/>
+    </net>
+    <net code="11" name="GPIO5">
+      <node ref="U1" pin="6"/>
+      <node ref="J2" pin="1"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="12" name="Net-(U1-Pad15)">
+      <node ref="U1" pin="15"/>
+    </net>
+    <net code="13" name="Net-(K1-Pad4)">
+      <node ref="K1" pin="4"/>
+    </net>
+    <net code="14" name="Net-(K1-Pad3)">
+      <node ref="K1" pin="3"/>
+    </net>
+    <net code="15" name="Net-(K1-Pad2)">
+      <node ref="K1" pin="2"/>
+    </net>
+    <net code="16" name="Net-(K1-Pad1)">
+      <node ref="K1" pin="1"/>
+    </net>
+    <net code="17" name="Net-(U1-Pad14)">
+      <node ref="U1" pin="14"/>
+    </net>
+    <net code="18" name="Net-(U1-Pad13)">
+      <node ref="U1" pin="13"/>
+    </net>
+    <net code="19" name="Net-(U1-Pad12)">
+      <node ref="U1" pin="12"/>
+    </net>
+    <net code="20" name="Net-(U1-Pad11)">
+      <node ref="U1" pin="11"/>
+    </net>
+    <net code="21" name="Net-(U1-Pad9)">
+      <node ref="U1" pin="9"/>
+    </net>
+    <net code="22" name="Net-(U2-Pad6)">
+      <node ref="U2" pin="6"/>
+    </net>
+    <net code="23" name="Net-(U2-Pad16)">
+      <node ref="U2" pin="16"/>
+    </net>
+    <net code="24" name="Net-(U2-Pad15)">
+      <node ref="U2" pin="15"/>
+    </net>
+    <net code="25" name="Net-(U2-Pad14)">
+      <node ref="U2" pin="14"/>
+    </net>
+    <net code="26" name="Net-(U2-Pad13)">
+      <node ref="U2" pin="13"/>
+    </net>
+    <net code="27" name="Net-(U2-Pad12)">
+      <node ref="U2" pin="12"/>
+    </net>
+    <net code="28" name="Net-(U2-Pad11)">
+      <node ref="U2" pin="11"/>
+    </net>
+    <net code="29" name="Net-(U2-Pad10)">
+      <node ref="U2" pin="10"/>
+    </net>
+    <net code="30" name="Net-(U2-Pad9)">
+      <node ref="U2" pin="9"/>
+    </net>
+    <net code="31" name="Net-(U2-Pad8)">
+      <node ref="U2" pin="8"/>
+    </net>
+    <net code="32" name="Net-(U2-Pad7)">
+      <node ref="U2" pin="7"/>
+    </net>
+    <net code="33" name="Net-(U2-Pad5)">
+      <node ref="U2" pin="5"/>
+    </net>
+    <net code="34" name="Net-(U2-Pad4)">
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="35" name="Net-(U2-Pad3)">
+      <node ref="U2" pin="3"/>
+    </net>
+  </nets>
+</export>

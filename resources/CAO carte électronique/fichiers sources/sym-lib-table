@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name captobox-rescue)(type Legacy)(uri ${KIPRJMOD}/captobox-rescue.lib)(options "")(descr ""))
+)

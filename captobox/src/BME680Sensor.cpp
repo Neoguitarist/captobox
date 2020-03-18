@@ -35,7 +35,7 @@ bool BME680Sensor::perform_reading()
 {
 	if (!_bme680.performReading())
 	{
-		log("Failed to perform reading :(");
+		log("Failed to perform reading.");
 		return false;
 	}
 
